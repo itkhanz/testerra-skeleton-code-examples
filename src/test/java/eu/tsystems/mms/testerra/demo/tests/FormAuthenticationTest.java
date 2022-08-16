@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public class FormAuthenticationTest extends AbstractTest implements Loggable {
 
-    public WebDriver driver;
+    /*public WebDriver driver;
     private StartPage startPage;
     private FormAuthenticationPage formAuthenticationPage;
 
@@ -36,19 +36,19 @@ public class FormAuthenticationTest extends AbstractTest implements Loggable {
         TestStep.begin("1. Init driver");
         log().info("initializing webdrivber");
         //TODO initialize webdriver and startpage and loginpage once
-        driver = WebDriverManager.getWebDriver(UUID.randomUUID().toString());
+        driver = WebDriverManager.getWebDriver();
         startPage = PageFactory.create(StartPage.class, driver);
         formAuthenticationPage = startPage.goToLoginPage();
-    }
+    }*/
 
     @Test
     public void testT05_FormAuthenticationSuccess() {
-        /*final WebDriver driver = WebDriverManager.getWebDriver();
+        final WebDriver driver = WebDriverManager.getWebDriver();
         StartPage startPage = PageFactory.create(StartPage.class, driver);
 
         TestStep.begin("2. Navigate to Login Page");
         log().info("navigating to the login page");
-        FormAuthenticationPage formAuthenticationPage = startPage.goToLoginPage();*/
+        FormAuthenticationPage formAuthenticationPage = startPage.goToLoginPage();
 
         TestStep.begin("3. Login with correct username and password and navigate to Secure Area");
         log().info("entering username password and click on login button");
@@ -83,12 +83,12 @@ public class FormAuthenticationTest extends AbstractTest implements Loggable {
 
     @Test
     public void testT06_FormAuthenticationFailed() {
-        /*final WebDriver driver = WebDriverManager.getWebDriver();
+        final WebDriver driver = WebDriverManager.getWebDriver();
         StartPage startPage = PageFactory.create(StartPage.class, driver);
 
         TestStep.begin("2. Navigate to Login Page");
         log().info("navigating to the login page");
-        FormAuthenticationPage formAuthenticationPage = startPage.goToLoginPage();*/
+        FormAuthenticationPage formAuthenticationPage = startPage.goToLoginPage();
 
         //Perform failed login with Invalid credentials
         formAuthenticationPage.loginFailed();

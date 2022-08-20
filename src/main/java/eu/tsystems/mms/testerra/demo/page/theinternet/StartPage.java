@@ -50,6 +50,9 @@ public class StartPage extends Page {
     @Check
     private GuiElement formAuthentication = new GuiElement(this.getWebDriver(), By.linkText("Form Authentication"));
 
+    @Check
+    private GuiElement dropdown = new GuiElement(this.getWebDriver(), By.linkText("Dropdown"));
+
     public StartPage(WebDriver driver) {
         super(driver);
     }
@@ -76,5 +79,10 @@ public class StartPage extends Page {
     public FormAuthenticationPage goToLoginPage() {
         this.formAuthentication.click();
         return PageFactory.create(FormAuthenticationPage.class, this.getWebDriver());
+    }
+
+    public DropdownPage goToDropdownPage() {
+        this.dropdown.click();
+        return PageFactory.create(DropdownPage.class, this.getWebDriver());
     }
 }

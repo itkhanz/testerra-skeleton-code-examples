@@ -26,6 +26,7 @@ import eu.tsystems.mms.tic.testframework.report.FailureCorridor;
 import eu.tsystems.mms.tic.testframework.report.model.steps.TestStep;
 import eu.tsystems.mms.tic.testframework.webdrivermanager.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import eu.tsystems.mms.testerra.demo.AbstractTest;
@@ -36,10 +37,11 @@ import java.util.List;
 /**
  * Sample Description goes here.
  * <p>
- * Date: 17.02.2020
- * Time: 12:42
+ * Created Date: 17.02.2020
+ * Last Edited Date: 20.08.2022
  *
- * @author Eric Kubenka
+ * @created by author Eric Kubenka
+ * @edited by author Ibtisam Tanveer Khan
  */
 public class TheInternetTest extends AbstractTest implements Loggable {
 
@@ -70,7 +72,7 @@ public class TheInternetTest extends AbstractTest implements Loggable {
 
     }
 
-    @Test(enabled = false)
+    @Test
     public void testT02_AddElementsTest() {
 
         final WebDriver driver = WebDriverManager.getWebDriver();
@@ -93,7 +95,7 @@ public class TheInternetTest extends AbstractTest implements Loggable {
         Assert.assertEquals(addAndRemoveElementsPage.getElementCount(), 2);
     }
 
-    @Test(enabled = false)
+    @Test
     public void testT03_SortTables() {
 
         final UserModel userJohnSmith = userModelFactory.createJohnSmith();
@@ -125,7 +127,7 @@ public class TheInternetTest extends AbstractTest implements Loggable {
         Assert.assertFalse(tablePage.isUserShown(userNonExisting));
     }
 
-    @Test(enabled = false)
+    @Test
     @Fails(ticketString = "http://jira.mms/JIRA-1337", description = "Will fail because user does not exist")
     @FailureCorridor.Low
     public void testT04_TableEntryNotPresent() {
@@ -141,6 +143,31 @@ public class TheInternetTest extends AbstractTest implements Loggable {
 
         TestStep.begin("3. Assert user shown.");
         Assert.assertTrue(tablePage.isUserShown(userNonExisting));
+    }
+
+    @Test
+    public void testT05_Dropdownlist() {
+        TestStep.begin("1. Init driver");
+        final WebDriver driver = WebDriverManager.getWebDriver();
+        StartPage startPage = PageFactory.create(StartPage.class, driver);
+
+        TestStep.begin("2. Navigate to Dropdown page");
+        DropdownPage dropdownPage = startPage.goToDropdownPage();
+
+        log().info("Printing all the options of a dropdown");
+        dropdownPage.showAllOptions();
+
+        TestStep.begin("3. Select Option 1 by index");
+        dropdownPage.setOptionByIndex(1);
+        Assert.assertEquals(dropdownPage.getSelectedOptionText(), "Option 1");
+
+        TestStep.begin("4. Select Option 2 by value attribute");
+        dropdownPage.setOptionByValue("2");
+        Assert.assertEquals(dropdownPage.getSelectedOptionText(), "Option 2");
+
+        TestStep.begin("5. Select Option 1 by visible text");
+        dropdownPage.setOptionByVisibletext("Option 1");
+        Assert.assertEquals(dropdownPage.getSelectedOptionText(), "Option 1");
     }
 
 }

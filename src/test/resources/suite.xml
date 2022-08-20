@@ -4,7 +4,7 @@
         <classes>
             <class name="eu.tsystems.mms.testerra.demo.tests.TheInternetTest">
                 <methods>
-                    <include name="testT05_Dropdownlist"/>
+                    <include name="testT06_Checkboxes"/>
                 </methods>
             </class>
         </classes>

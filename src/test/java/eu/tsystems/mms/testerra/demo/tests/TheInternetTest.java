@@ -31,6 +31,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import eu.tsystems.mms.testerra.demo.AbstractTest;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,6 +47,7 @@ import java.util.List;
 public class TheInternetTest extends AbstractTest implements Loggable {
 
     private static final UserModelFactory userModelFactory = new UserModelFactory();
+    //private enum CheckboxMethods {SELECT, DESELECT};
 
     @Test(enabled = false)
     public void testT01_DoDragAndDrop() {
@@ -168,6 +170,42 @@ public class TheInternetTest extends AbstractTest implements Loggable {
         TestStep.begin("5. Select Option 1 by visible text");
         dropdownPage.setOptionByVisibletext("Option 1");
         Assert.assertEquals(dropdownPage.getSelectedOptionText(), "Option 1");
+    }
+
+    @Test
+    public void testT06_Checkboxes() {
+
+        TestStep.begin("1. Init driver");
+        final WebDriver driver = WebDriverManager.getWebDriver();
+        StartPage startPage = PageFactory.create(StartPage.class, driver);
+
+        TestStep.begin("2. Navigate to Checkboxes page");
+        CheckboxesPage checkboxesPage = startPage.goToCheckboxesPage();
+
+        TestStep.begin("3. Get initial selected checkboxes");
+        checkboxesPage.getSelectedCheckboxes();
+
+        TestStep.begin("4. deselect checkbox 2");
+//        Assert.assertTrue(checkboxesPage.editCheckbox("checkbox 2", CheckboxMethods.DESELECT.toString()));
+        Assert.assertFalse(checkboxesPage.deselectCheckbox(1));
+
+        TestStep.begin("5. select checkbox 1 ");
+//        Assert.assertTrue(checkboxesPage.editCheckbox("checkbox 1", CheckboxMethods.SELECT.toString()));
+        Assert.assertTrue(checkboxesPage.selectCheckbox(0));
+
+        TestStep.begin("6. Get selected checboxes");
+        ArrayList<String> selectedCheckboxes = checkboxesPage.getSelectedCheckboxes();
+        Assert.assertTrue(selectedCheckboxes.contains("checkbox 1"));
+        Assert.assertFalse(selectedCheckboxes.contains("checkbox 2"));
+
+        TestStep.begin("7. select checkbox 2 ");
+        Assert.assertTrue(checkboxesPage.selectCheckbox(1));
+
+        TestStep.begin("8. All checboxes selected ");
+        selectedCheckboxes = checkboxesPage.getSelectedCheckboxes();
+        Assert.assertTrue(selectedCheckboxes.contains("checkbox 1"));
+        Assert.assertTrue(selectedCheckboxes.contains("checkbox 2"));
+
     }
 
 }

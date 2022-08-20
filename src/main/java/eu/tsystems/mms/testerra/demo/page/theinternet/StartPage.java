@@ -53,6 +53,9 @@ public class StartPage extends Page {
     @Check
     private GuiElement dropdown = new GuiElement(this.getWebDriver(), By.linkText("Dropdown"));
 
+    @Check
+    private GuiElement checkboxes = new GuiElement(this.getWebDriver(), By.linkText("Checkboxes"));
+
     public StartPage(WebDriver driver) {
         super(driver);
     }
@@ -84,5 +87,10 @@ public class StartPage extends Page {
     public DropdownPage goToDropdownPage() {
         this.dropdown.click();
         return PageFactory.create(DropdownPage.class, this.getWebDriver());
+    }
+
+    public CheckboxesPage goToCheckboxesPage(){
+        this.checkboxes.click();
+        return PageFactory.create(CheckboxesPage.class, this.getWebDriver());
     }
 }

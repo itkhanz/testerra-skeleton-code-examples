@@ -208,4 +208,37 @@ public class TheInternetTest extends AbstractTest implements Loggable {
 
     }
 
+    @Test
+    public void testT07_Hovers() {
+        TestStep.begin("1. Init driver");
+        final WebDriver driver = WebDriverManager.getWebDriver();
+        StartPage startPage = PageFactory.create(StartPage.class, driver);
+
+        TestStep.begin("2. Navigate to Hovers page");
+        HoversPage hoversPage = startPage.goToHoversPage();
+
+        TestStep.begin("3. Create Hashmap of all figures elements");
+        hoversPage.figListToHashmap();
+
+        TestStep.begin("4. Verify that initially no figure data is displayed");
+        for (int i = 1; i<=3; i++) {
+            Assert.assertFalse(hoversPage.isFigDataShown(i));
+        }
+
+        TestStep.begin("5. Hover on Figure 2");
+        Assert.assertTrue(hoversPage.hoverOnFig(2));
+
+        TestStep.begin("6. Verify that figure 2 data is displayed on hover");
+        Assert.assertTrue(hoversPage.isFigDataShown(2));
+
+        //Problem Mouse pointer stays over figure 2 and a seprate hover is performed on page heading
+        //TODO Find a a way to remove hover
+        /*TestStep.begin("7. Change hover to page heading");
+        hoversPage.hoverOnHeading();
+
+        TestStep.begin("8. Verify that figure 2 data is not displayed without hover");
+        Assert.assertFalse(hoversPage.hoverOnFig(2));*/
+
+    }
+
 }

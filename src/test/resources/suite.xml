@@ -4,7 +4,7 @@
         <classes>
             <class name="eu.tsystems.mms.testerra.demo.tests.TheInternetTest">
                 <methods>
-                    <include name="testT06_Checkboxes"/>
+                    <include name="testT07_Hovers"/>
                 </methods>
             </class>
         </classes>

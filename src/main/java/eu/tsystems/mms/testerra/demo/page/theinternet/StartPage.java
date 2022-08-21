@@ -56,6 +56,9 @@ public class StartPage extends Page {
     @Check
     private GuiElement checkboxes = new GuiElement(this.getWebDriver(), By.linkText("Checkboxes"));
 
+    @Check
+    private GuiElement hovers = new GuiElement(this.getWebDriver(), By.linkText("Hovers"));
+
     public StartPage(WebDriver driver) {
         super(driver);
     }
@@ -92,5 +95,10 @@ public class StartPage extends Page {
     public CheckboxesPage goToCheckboxesPage(){
         this.checkboxes.click();
         return PageFactory.create(CheckboxesPage.class, this.getWebDriver());
+    }
+
+    public HoversPage goToHoversPage() {
+        this.hovers.click();
+        return PageFactory.create(HoversPage.class, this.getWebDriver());
     }
 }

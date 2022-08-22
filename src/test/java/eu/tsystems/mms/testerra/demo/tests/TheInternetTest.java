@@ -277,10 +277,6 @@ public class TheInternetTest extends AbstractTest implements Loggable {
         TestStep.begin("2. Navigate to JS Alerts page");
         MultipleWindowsPage multipleWindowsPage = startPage.goToMultipleWindowsPage();
 
-        System.out.println("****************TEST start****************");
-        System.out.println(multipleWindowsPage.getWindowTitle());
-        System.out.println("****************TEST end****************");
-
         TestStep.begin("3. Open New Window");
         multipleWindowsPage.openNewWindow();
 

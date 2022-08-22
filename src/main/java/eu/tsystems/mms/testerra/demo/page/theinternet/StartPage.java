@@ -21,6 +21,7 @@ import eu.tsystems.mms.tic.testframework.pageobjects.Check;
 import eu.tsystems.mms.tic.testframework.pageobjects.GuiElement;
 import eu.tsystems.mms.tic.testframework.pageobjects.Page;
 import eu.tsystems.mms.tic.testframework.pageobjects.factory.PageFactory;
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -61,6 +62,9 @@ public class StartPage extends Page {
 
     @Check
     private GuiElement jsAlerts = new GuiElement(this.getWebDriver(), By.linkText("JavaScript Alerts"));
+
+    @Check
+    private GuiElement multipleWindows = new GuiElement(this.getWebDriver(), By.linkText("Multiple Windows"));
 
     public StartPage(WebDriver driver) {
         super(driver);
@@ -108,5 +112,10 @@ public class StartPage extends Page {
     public JSAlertsPage goToJSAlertsPage() {
         this.jsAlerts.click();
         return PageFactory.create(JSAlertsPage.class, this.getWebDriver());
+    }
+
+    public MultipleWindowsPage goToMultipleWindowsPage() {
+        this.multipleWindows.click();
+        return PageFactory.create(MultipleWindowsPage.class, this.getWebDriver());
     }
 }

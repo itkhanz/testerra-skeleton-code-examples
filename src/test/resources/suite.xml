@@ -4,7 +4,7 @@
         <classes>
             <class name="eu.tsystems.mms.testerra.demo.tests.TheInternetTest">
                 <methods>
-                    <include name="testT08_JSAlerts"/>
+                    <include name="testT09_MultipleWindows"/>
                 </methods>
             </class>
         </classes>

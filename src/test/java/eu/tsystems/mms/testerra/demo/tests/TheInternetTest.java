@@ -268,4 +268,34 @@ public class TheInternetTest extends AbstractTest implements Loggable {
 
     }
 
+    @Test
+    public void testT09_MultipleWindows() {
+        TestStep.begin("1. Init driver");
+        final WebDriver driver = WebDriverManager.getWebDriver();
+        StartPage startPage = PageFactory.create(StartPage.class, driver);
+
+        TestStep.begin("2. Navigate to JS Alerts page");
+        MultipleWindowsPage multipleWindowsPage = startPage.goToMultipleWindowsPage();
+
+        System.out.println("****************TEST start****************");
+        System.out.println(multipleWindowsPage.getWindowTitle());
+        System.out.println("****************TEST end****************");
+
+        TestStep.begin("3. Open New Window");
+        multipleWindowsPage.openNewWindow();
+
+        TestStep.begin("4. Switch to  New Window");
+        multipleWindowsPage.switchToWindow("New Window");
+
+        TestStep.begin("5. Verify the Url of new window");
+        Assert.assertEquals(multipleWindowsPage.getWindowUrl(), "https://the-internet.herokuapp.com/windows/new");
+
+        TestStep.begin("6. Switch back to Parent Window");
+        multipleWindowsPage.switchToWindow("The Internet");
+
+        TestStep.begin("7. Verify the Url of Parent window");
+        Assert.assertEquals(multipleWindowsPage.getWindowUrl(), "https://the-internet.herokuapp.com/windows");
+
+    }
+
 }

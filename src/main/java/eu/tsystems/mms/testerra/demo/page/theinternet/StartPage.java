@@ -59,6 +59,9 @@ public class StartPage extends Page {
     @Check
     private GuiElement hovers = new GuiElement(this.getWebDriver(), By.linkText("Hovers"));
 
+    @Check
+    private GuiElement jsAlerts = new GuiElement(this.getWebDriver(), By.linkText("JavaScript Alerts"));
+
     public StartPage(WebDriver driver) {
         super(driver);
     }
@@ -100,5 +103,10 @@ public class StartPage extends Page {
     public HoversPage goToHoversPage() {
         this.hovers.click();
         return PageFactory.create(HoversPage.class, this.getWebDriver());
+    }
+
+    public JSAlertsPage goToJSAlertsPage() {
+        this.jsAlerts.click();
+        return PageFactory.create(JSAlertsPage.class, this.getWebDriver());
     }
 }

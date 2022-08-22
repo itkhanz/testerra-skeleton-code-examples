@@ -25,6 +25,7 @@ import eu.tsystems.mms.tic.testframework.pageobjects.factory.PageFactory;
 import eu.tsystems.mms.tic.testframework.report.FailureCorridor;
 import eu.tsystems.mms.tic.testframework.report.model.steps.TestStep;
 import eu.tsystems.mms.tic.testframework.webdrivermanager.WebDriverManager;
+import io.cucumber.java.bs.A;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -39,7 +40,7 @@ import java.util.List;
  * Sample Description goes here.
  * <p>
  * Created Date: 17.02.2020
- * Last Edited Date: 20.08.2022
+ * Last Edited Date: 22.08.2022
  *
  * @created by author Eric Kubenka
  * @edited by author Ibtisam Tanveer Khan
@@ -238,6 +239,32 @@ public class TheInternetTest extends AbstractTest implements Loggable {
 
         TestStep.begin("8. Verify that figure 2 data is not displayed without hover");
         Assert.assertFalse(hoversPage.hoverOnFig(2));*/
+
+    }
+
+    @Test
+    public void testT08_JSAlerts() {
+        TestStep.begin("1. Init driver");
+        final WebDriver driver = WebDriverManager.getWebDriver();
+        StartPage startPage = PageFactory.create(StartPage.class, driver);
+
+        TestStep.begin("2. Navigate to JS Alerts page");
+        JSAlertsPage jsAlertsPage = startPage.goToJSAlertsPage();
+
+        TestStep.begin("3. Click for JS Alert");
+        Assert.assertTrue(jsAlertsPage.clickAlert().contains("You successfully clicked an alert"));
+
+        TestStep.begin("4. Accept JS Confirm alert");
+        Assert.assertTrue(jsAlertsPage.clickConfirm("ok").contains("You clicked: Ok"));
+
+        TestStep.begin("5. Cancel JS Confirm alert");
+        Assert.assertTrue(jsAlertsPage.clickConfirm("cancel").contains("You clicked: Cancel"));
+
+        TestStep.begin("6. Send a JS Prompt alert text");
+        Assert.assertTrue(jsAlertsPage.enterPrompt("I am a test", "ok").contains("You entered: I am a test"));
+
+        TestStep.begin("6. Cancel a JS Prompt alert text");
+        Assert.assertTrue(jsAlertsPage.enterPrompt("I am a test", "cancel").contains("You entered: null"));
 
     }
 

@@ -294,4 +294,18 @@ public class TheInternetTest extends AbstractTest implements Loggable {
 
     }
 
+    @Test
+    public void testT10_NestedFrames() {
+        TestStep.begin("1. Init driver");
+        final WebDriver driver = WebDriverManager.getWebDriver();
+        StartPage startPage = PageFactory.create(StartPage.class, driver);
+
+        TestStep.begin("2. Navigate to Nested Frames page");
+        NestedFramesPage nestedFramesPage = startPage.goToNestedFramesPage();
+
+        TestStep.begin("3. Verify the content of bottom frame");
+//        Assert.assertTrue(nestedFramesPage.getBottomFrameVal().contains("BOTTOM"));
+        Assert.assertTrue(nestedFramesPage.getTopFrameVal().contains("MIDDLE"));
+    }
+
 }

@@ -4,7 +4,7 @@
         <classes>
             <class name="eu.tsystems.mms.testerra.demo.tests.TheInternetTest">
                 <methods>
-                    <include name="testT09_MultipleWindows"/>
+                    <include name="testT10_NestedFrames"/>
                 </methods>
             </class>
         </classes>

@@ -66,6 +66,9 @@ public class StartPage extends Page {
     @Check
     private GuiElement multipleWindows = new GuiElement(this.getWebDriver(), By.linkText("Multiple Windows"));
 
+    @Check
+    private GuiElement nestedFrames = new GuiElement(this.getWebDriver(), By.linkText("Nested Frames"));
+
     public StartPage(WebDriver driver) {
         super(driver);
     }
@@ -117,5 +120,10 @@ public class StartPage extends Page {
     public MultipleWindowsPage goToMultipleWindowsPage() {
         this.multipleWindows.click();
         return PageFactory.create(MultipleWindowsPage.class, this.getWebDriver());
+    }
+
+    public NestedFramesPage goToNestedFramesPage() {
+        this.nestedFrames.click();
+        return PageFactory.create(NestedFramesPage.class, this.getWebDriver());
     }
 }

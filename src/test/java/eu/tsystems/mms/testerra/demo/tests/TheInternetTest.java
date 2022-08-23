@@ -304,8 +304,13 @@ public class TheInternetTest extends AbstractTest implements Loggable {
         NestedFramesPage nestedFramesPage = startPage.goToNestedFramesPage();
 
         TestStep.begin("3. Verify the content of bottom frame");
-//        Assert.assertTrue(nestedFramesPage.getBottomFrameVal().contains("BOTTOM"));
-        Assert.assertTrue(nestedFramesPage.getTopFrameVal().contains("MIDDLE"));
+        Assert.assertTrue(nestedFramesPage.getBottomFrameVal().contains("BOTTOM"));
+
+        TestStep.begin("4. Verify the content of middle frame inside top frame");
+        Assert.assertEquals(nestedFramesPage.getTopMidFrameVal(),"MIDDLE");
+
+        TestStep.begin("5. Verify the content of right frame inside top frame");
+        Assert.assertTrue(nestedFramesPage.getTopRightFrameVal().contains("RIGHT"));
     }
 
 }

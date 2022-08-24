@@ -24,6 +24,7 @@ import eu.tsystems.mms.tic.testframework.logging.Loggable;
 import eu.tsystems.mms.tic.testframework.pageobjects.factory.PageFactory;
 import eu.tsystems.mms.tic.testframework.report.FailureCorridor;
 import eu.tsystems.mms.tic.testframework.report.model.steps.TestStep;
+import eu.tsystems.mms.tic.testframework.utils.TimerUtils;
 import eu.tsystems.mms.tic.testframework.webdrivermanager.WebDriverManager;
 import io.cucumber.java.bs.A;
 import org.openqa.selenium.WebDriver;
@@ -311,6 +312,57 @@ public class TheInternetTest extends AbstractTest implements Loggable {
 
         TestStep.begin("5. Verify the content of right frame inside top frame");
         Assert.assertTrue(nestedFramesPage.getTopRightFrameVal().contains("RIGHT"));
+    }
+
+    @Test
+    public void testT11_TextEditor() {
+        TestStep.begin("1. Init driver");
+        final WebDriver driver = WebDriverManager.getWebDriver();
+        StartPage startPage = PageFactory.create(StartPage.class, driver);
+
+        TestStep.begin("2. Navigate to an iFrame containing the TinyMCE WYSIWYG Editor page");
+        TextEditorPage textEditorPage = startPage.goToTextEditorPage();
+
+
+        TestStep.begin("3. Writing a normal text to editor");
+        textEditorPage.clearEditor();
+        textEditorPage.writeToEditor("This is a normal text");
+        Assert.assertTrue(textEditorPage.readFromEditor("normal").contains("This is a normal text"));
+
+        TestStep.begin("4. Make the text align right");
+        textEditorPage.clickAlignRightBtn();
+        TimerUtils.sleep(1000, "See if the text is aligned right");
+        Assert.assertTrue(textEditorPage.checkAlignment("right"), "Text is not aligned right");
+
+        TestStep.begin("4. Make the text align center");
+        textEditorPage.clickAlignCenterBtn();
+        TimerUtils.sleep(1000, "See if the text is aligned center");
+        Assert.assertTrue(textEditorPage.checkAlignment("center"), "Text is not aligned center");
+
+        TestStep.begin("4. Make the text align justify");
+        textEditorPage.clickAlignJustifyBtn();
+        TimerUtils.sleep(1000, "See if the text is aligned justify");
+        Assert.assertTrue(textEditorPage.checkAlignment("justify"), "Text is not aligned justify");
+
+        TestStep.begin("4. Make the text align left");
+        textEditorPage.clickAlignLeftBtn();
+        TimerUtils.sleep(1000, "See if the text is aligned left");
+        Assert.assertTrue(textEditorPage.checkAlignment("left"), "Text is not aligned left");
+
+        TestStep.begin("4. Writing bolder text");
+        textEditorPage.clearEditor();
+        textEditorPage.clickBoldBtn();
+        textEditorPage.writeToEditor("This is a bold text");
+        textEditorPage.clickBoldBtn();
+        Assert.assertTrue(textEditorPage.readFromEditor("bold").contains("This is a bold text"));
+
+        TestStep.begin("4. Writing Italic text");
+        textEditorPage.clearEditor();
+        textEditorPage.clickItalicBtn();
+        textEditorPage.writeToEditor("This is an italic text");
+        textEditorPage.clickItalicBtn();
+        Assert.assertTrue(textEditorPage.readFromEditor("italic").contains("This is an italic text"));
+
     }
 
 }

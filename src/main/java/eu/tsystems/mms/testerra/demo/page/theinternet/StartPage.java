@@ -69,6 +69,9 @@ public class StartPage extends Page {
     @Check
     private GuiElement nestedFrames = new GuiElement(this.getWebDriver(), By.linkText("Nested Frames"));
 
+    @Check
+    private GuiElement textEditor = new GuiElement(this.getWebDriver(), By.linkText("WYSIWYG Editor"));
+
     public StartPage(WebDriver driver) {
         super(driver);
     }
@@ -125,5 +128,10 @@ public class StartPage extends Page {
     public NestedFramesPage goToNestedFramesPage() {
         this.nestedFrames.click();
         return PageFactory.create(NestedFramesPage.class, this.getWebDriver());
+    }
+
+    public TextEditorPage goToTextEditorPage() {
+        this.textEditor.click();
+        return PageFactory.create(TextEditorPage.class, this.getWebDriver());
     }
 }

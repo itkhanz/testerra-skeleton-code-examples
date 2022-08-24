@@ -14,6 +14,18 @@ import java.util.List;
  * Resources:-
  * https://docs.testerra.io/testerra/1-latest/index.html#_guielements_inside_frames
  * https://www.selenium.dev/documentation/webdriver/browser/frames/
+ * https://stackoverflow.com/a/21713629
+ * https://stackoverflow.com/a/21688223
+ * https://stackoverflow.com/a/21617345
+ * https://yizeng.me/2014/01/31/test-wysiwyg-editors-using-selenium-webdriver/
+ * https://seleniumjavaautomation.wordpress.com/2016/05/17/selenium-automation-ckeditor-2/
+ * https://stackoverflow.com/a/40104135
+ * https://www.tutorialspoint.com/how-do-you-enter-text-in-the-edit-box-in-selenium
+ * https://stackoverflow.com/a/9188374
+ * https://stackoverflow.com/a/70853660
+ * https://artoftesting.com/check-if-an-element-is-present-in-a-webpage-selenium-webdriver-java
+ *
+ *
  * Date: 23.08.2022
  * Time: 13:45
  *

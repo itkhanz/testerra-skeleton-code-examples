@@ -62,18 +62,17 @@ public class StartPage extends Page {
 
     @Check
     private GuiElement jsAlerts = new GuiElement(this.getWebDriver(), By.linkText("JavaScript Alerts"));
-
     @Check
     private GuiElement multipleWindows = new GuiElement(this.getWebDriver(), By.linkText("Multiple Windows"));
-
     @Check
     private GuiElement nestedFrames = new GuiElement(this.getWebDriver(), By.linkText("Nested Frames"));
-
     @Check
     private GuiElement textEditor = new GuiElement(this.getWebDriver(), By.linkText("WYSIWYG Editor"));
-
     @Check
     private GuiElement jQueryUIMenu = new GuiElement(this.getWebDriver(), By.linkText("JQuery UI Menus"));
+    @Check
+    private GuiElement shadowDOM = new GuiElement(this.getWebDriver(), By.linkText("Shadow DOM"));
+
 
     public StartPage(WebDriver driver) {
         super(driver);
@@ -141,5 +140,10 @@ public class StartPage extends Page {
     public JQueryUIMenuPage goToJqueryUIMenuPage() {
         this.jQueryUIMenu.click();
         return PageFactory.create(JQueryUIMenuPage.class, this.getWebDriver());
+    }
+
+    public ShadowDomPage goToShadowDomPage() {
+        this.shadowDOM.click();
+        return PageFactory.create(ShadowDomPage.class, this.getWebDriver());
     }
 }

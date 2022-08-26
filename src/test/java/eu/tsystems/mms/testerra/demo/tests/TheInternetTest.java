@@ -388,4 +388,18 @@ public class TheInternetTest extends AbstractTest implements Loggable {
 
     }
 
+    @Test
+    public void testT13_ShadowDOM() {
+        TestStep.begin("1. Init driver");
+        final WebDriver driver = WebDriverManager.getWebDriver();
+        StartPage startPage = PageFactory.create(StartPage.class, driver);
+
+        TestStep.begin("2. Navigate to Shadow DOM Page page");
+        ShadowDomPage shadowDomPage = startPage.goToShadowDomPage();
+
+        TestStep.begin("3. Check the value inside Shadow root DOM");
+        //Assert.assertEquals(shadowDomPage.getShadowRootElementText(), "My default text");
+        Assert.assertEquals(shadowDomPage.getShadowRootElementTextJS(), "My default text");
+    }
+
 }

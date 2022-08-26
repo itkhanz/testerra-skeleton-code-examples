@@ -2,6 +2,7 @@ package eu.tsystems.mms.testerra.demo.page.theinternet;
 
 import eu.tsystems.mms.tic.testframework.pageobjects.GuiElement;
 import eu.tsystems.mms.tic.testframework.pageobjects.Page;
+import eu.tsystems.mms.tic.testframework.utils.JSUtils;
 import eu.tsystems.mms.tic.testframework.utils.TimerUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +25,9 @@ import java.util.List;
  * https://stackoverflow.com/a/9188374
  * https://stackoverflow.com/a/70853660
  * https://artoftesting.com/check-if-an-element-is-present-in-a-webpage-selenium-webdriver-java
+ * https://docs.testerra.io/testerra/1-latest/index.html#_execute_javascript
+ * https://www.lambdatest.com/blog/how-to-use-javascriptexecutor-in-selenium-webdriver/
+ * https://www.toolsqa.com/selenium-webdriver/javascript-and-selenium-javascriptexecutor/
  *
  *
  * Date: 23.08.2022
@@ -69,6 +73,14 @@ public class TextEditorPage extends Page {
         this.switchToEditorFrame();
         editorBody.click();
         editorBody.sendKeys(textToWrite);
+
+        //You can also use JS executor to set the inner HTML to your desired text
+        /*JSUtils.executeScript(
+                this.getWebDriver(),
+                "arguments[0].innerHTML = '<h1>This is a H1 Heading text</h1>'",
+                editorBody.getWebElement()
+        );*/
+
 
         TimerUtils.sleep(2000, "just waiting to read the text written to editor");
         this.switchToDefaultFrame();

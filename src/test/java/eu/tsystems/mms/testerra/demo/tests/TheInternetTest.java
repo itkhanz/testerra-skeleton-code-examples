@@ -329,7 +329,7 @@ public class TheInternetTest extends AbstractTest implements Loggable {
         textEditorPage.writeToEditor("This is a normal text");
         Assert.assertTrue(textEditorPage.readFromEditor("normal").contains("This is a normal text"));
 
-        TestStep.begin("4. Make the text align right");
+        /*TestStep.begin("4. Make the text align right");
         textEditorPage.clickAlignRightBtn();
         TimerUtils.sleep(1000, "See if the text is aligned right");
         Assert.assertTrue(textEditorPage.checkAlignment("right"), "Text is not aligned right");
@@ -361,7 +361,30 @@ public class TheInternetTest extends AbstractTest implements Loggable {
         textEditorPage.clickItalicBtn();
         textEditorPage.writeToEditor("This is an italic text");
         textEditorPage.clickItalicBtn();
-        Assert.assertTrue(textEditorPage.readFromEditor("italic").contains("This is an italic text"));
+        Assert.assertTrue(textEditorPage.readFromEditor("italic").contains("This is an italic text"));*/
+
+    }
+
+    @Test
+    public void testT12_JQueryUIMenu() {
+        TestStep.begin("1. Init driver");
+        final WebDriver driver = WebDriverManager.getWebDriver();
+        StartPage startPage = PageFactory.create(StartPage.class, driver);
+
+        TestStep.begin("2. Navigate to jQuery UI Menu page");
+        JQueryUIMenuPage jQueryUIMenuPage = startPage.goToJqueryUIMenuPage();
+
+        TestStep.begin("3. Download PDF File");
+        Assert.assertTrue(jQueryUIMenuPage.download("PDF").contains("/download/jqueryui/menu/menu.pdf"));
+
+        TestStep.begin("4. Download CSV File");
+        Assert.assertTrue(jQueryUIMenuPage.download("CSV").contains("/download/jqueryui/menu/menu.csv"));
+
+        TestStep.begin("5. Download Excel File");
+        Assert.assertTrue(jQueryUIMenuPage.download("Excel").contains("/download/jqueryui/menu/menu.xls"));
+
+        TestStep.begin("6. Verify Disabled button is not enabled");
+        Assert.assertTrue(jQueryUIMenuPage.disabledCheck(), "Element is not disabled, please review code!");
 
     }
 

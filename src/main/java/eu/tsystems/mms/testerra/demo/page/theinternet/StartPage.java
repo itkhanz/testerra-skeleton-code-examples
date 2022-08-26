@@ -72,6 +72,9 @@ public class StartPage extends Page {
     @Check
     private GuiElement textEditor = new GuiElement(this.getWebDriver(), By.linkText("WYSIWYG Editor"));
 
+    @Check
+    private GuiElement jQueryUIMenu = new GuiElement(this.getWebDriver(), By.linkText("JQuery UI Menus"));
+
     public StartPage(WebDriver driver) {
         super(driver);
     }
@@ -133,5 +136,10 @@ public class StartPage extends Page {
     public TextEditorPage goToTextEditorPage() {
         this.textEditor.click();
         return PageFactory.create(TextEditorPage.class, this.getWebDriver());
+    }
+
+    public JQueryUIMenuPage goToJqueryUIMenuPage() {
+        this.jQueryUIMenu.click();
+        return PageFactory.create(JQueryUIMenuPage.class, this.getWebDriver());
     }
 }

@@ -400,6 +400,10 @@ public class TheInternetTest extends AbstractTest implements Loggable {
         TestStep.begin("3. Check the value inside Shadow root DOM");
         //Assert.assertEquals(shadowDomPage.getShadowRootElementText(), "My default text");
         Assert.assertEquals(shadowDomPage.getShadowRootElementTextJS(), "My default text");
+
+        //Assert.assertTrue(shadowDomPage.fillShadowDOM(), "This method checks if the shadowRoot() in TT works as expected");
     }
+
+
 
 }

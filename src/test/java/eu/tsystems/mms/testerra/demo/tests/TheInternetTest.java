@@ -33,15 +33,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import eu.tsystems.mms.testerra.demo.AbstractTest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Sample Description goes here.
  * <p>
  * Created Date: 17.02.2020
- * Last Edited Date: 22.08.2022
+ * Last Edited Date: 30.08.2022
  *
  * @created by author Eric Kubenka
  * @edited by author Ibtisam Tanveer Khan
@@ -402,6 +400,68 @@ public class TheInternetTest extends AbstractTest implements Loggable {
         Assert.assertEquals(shadowDomPage.getShadowRootElementTextJS(), "My default text");
 
         //Assert.assertTrue(shadowDomPage.fillShadowDOM(), "This method checks if the shadowRoot() in TT works as expected");
+    }
+
+    //testT14_DataTables makes the same Assertions as testT03_SortTables but the Tables page and methods are coded with latest Java features
+    @Test
+    public void testT14_DataTables() {
+
+        TestStep.begin("1. Init driver");
+        final WebDriver driver = WebDriverManager.getWebDriver();
+        StartPage startPage = PageFactory.create(StartPage.class, driver);
+
+        TestStep.begin("2. Navigate to tables");
+        DataTablesPage dataTablesPage = startPage.goToDataTablesPage();
+
+        TestStep.begin("3. Assert Last Name column present");
+        Assert.assertTrue(dataTablesPage.getTableHeaders().containsKey("last-name"), "Last Name header not present");
+
+        log().info("Table before Sorting");
+
+        TestStep.begin("4. Get data of first entry");
+        //List of HashMaps<String className, String text>, data will not contain action
+        List<HashMap<String, String>> rowsListMap = dataTablesPage.getTableBody();
+        Assert.assertEquals(rowsListMap.get(0).get("last-name"), "Smith");
+        Assert.assertEquals(rowsListMap.get(0).get("first-name"), "John");
+
+        log().info("Table after Sorting");
+
+        TestStep.begin("5. Sort by Last Name");
+        dataTablesPage.doSortTableByColumn("last-name");
+
+        TestStep.begin("6. Assert another data set is now in row 1");
+        List<HashMap<String, String>> rowsSortedByClick = dataTablesPage.getTableBody();
+        Assert.assertEquals(rowsSortedByClick.get(0).get("last-name"), "Bach");
+        Assert.assertEquals(rowsSortedByClick.get(0).get("first-name"), "Frank");
+
+        /*An additional assertion can be made to first manually sort the data by column name
+           and by using JAVA comparators, and then assert that the rows are sorted correctly when
+           a header column  is clicked. As a note, this is not a UI test but more of a unit test.
+        */
+        TestStep.begin("7. Mannual Sorting by last-name using JAVA Collections and Stream API");
+        List<HashMap<String, String>> sortedByLastname = dataTablesPage.doSortByColumnComparator(rowsListMap, "last-name");
+
+        TestStep.begin("8. Assert that the data sorted through UI click is the same as sorted by comparator ");
+        Assert.assertEquals(rowsSortedByClick.get(0).get("last-name"), sortedByLastname.get(0).get("last-name"));
+        Assert.assertEquals(rowsSortedByClick.get(0).get("first-name"), sortedByLastname.get(0).get("first-name"));
+        Assert.assertEquals(rowsSortedByClick.get(0).get("dues"), sortedByLastname.get(0).get("dues"));
+
+        TestStep.begin("9. Mannualy Sorting by Dues");
+        List<HashMap<String, String>> sortedByDues = dataTablesPage.doSortByColumnComparator(rowsListMap, "dues");
+
+        TestStep.begin("10. Assert that the row with lowest dues is at the first entry");
+        Assert.assertEquals(sortedByDues.get(0).get("dues"), "$50.00");
+        Assert.assertEquals(sortedByDues.get(sortedByDues.size()-1).get("dues"), "$100.00");
+
+        TestStep.begin("11. Reverse the list sorted by dues in descending order");
+        Collections.reverse(sortedByDues);
+
+        TestStep.begin("12. Assert that the row with Highest dues is at the first entry");
+        Assert.assertEquals(sortedByDues.get(0).get("dues"), "$100.00");
+        Assert.assertEquals(sortedByDues.get(sortedByDues.size()-1).get("dues"), "$50.00");
+
+
+
     }
 
 

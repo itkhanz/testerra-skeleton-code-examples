@@ -146,4 +146,9 @@ public class StartPage extends Page {
         this.shadowDOM.click();
         return PageFactory.create(ShadowDomPage.class, this.getWebDriver());
     }
+
+    public DataTablesPage goToDataTablesPage() {
+        this.navLinkTables.click();
+        return PageFactory.create(DataTablesPage.class,  this.getWebDriver());
+    }
 }

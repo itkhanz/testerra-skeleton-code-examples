@@ -4,7 +4,7 @@
         <classes>
             <class name="eu.tsystems.mms.testerra.demo.tests.TheInternetTest">
                 <methods>
-                    <include name="testT13_ShadowDOM"/>
+                    <include name="testT14_DataTables"/>
                 </methods>
             </class>
         </classes>
